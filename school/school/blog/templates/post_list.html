@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Блог</h1>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'blog:create' %}">Створити допис</a>
+{% endif %}
+
+
+<hr>
+
+<!--{% for post in object_list %}-->
+<!--    <h2>-->
+<!--        <a href="{% url 'blog:detail' post.id %}">-->
+<!--            {{ post.title }}-->
+<!--        </a>-->
+<!--    </h2>-->
+<!--    <p>{{ post.content|truncatechars:150 }}</p>-->
+<!--{% empty %}-->
+<!--    <p>Поки що немає дописів</p>-->
+<!--{% endfor %}-->
+
+{% if is_paginated %}
+<hr>
+
+<div>
+    {% if page_obj.has_previous %}
+        <a href="?page=1">⏮️ Перша</a>
+        <a href="?page={{ page_obj.previous_page_number }}">◀️ Назад</a>
+    {% endif %}
+
+    <span>
+        Сторінка <b>{{ page_obj.number }}</b> з <b>{{ page_obj.paginator.num_pages }}</b>
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Вперед ▶️</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Остання ⏭️</a>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

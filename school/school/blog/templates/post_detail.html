@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p>{{ object.content }}</p>
+
+{% for image in object.images.all %}
+    <img src="{{ image.image.url }}" width="200">
+{% endfor %}
+<hr>
+<h3>Коментарі</h3>
+{% for comment in object.comments.all %}
+    <p><b>{{ comment.author.username }}:</b> {{ comment.text }}</p>
+{% empty %}
+    <p>Коментарів немає</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'blog:comment_create' object.id %}">
+    {% csrf_token %}
+    <textarea name="text"></textarea><br>
+    <button type="submit">Додати коментар</button>
+</form>
+{% endif %}
+{% endblock %}

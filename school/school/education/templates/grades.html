@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Мої оцінки</h1>
+
+<ul>
+{% for grade in object_list %}
+    <li>
+        {{ grade.lesson.subject }} —
+        {{ grade.value }} ({{ grade.date }})
+    </li>
+{% empty %}
+    <li>Оцінок поки немає</li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Розклад</h1>
+
+<table border="1">
+    <tr>
+        <th>День</th>
+        <th>Урок</th>
+        <th>Предмет</th>
+        <th>Вчитель</th>
+        <th>Кабінет</th>
+    </tr>
+    {% for lesson in object_list %}
+    <tr>
+        <td>{{ lesson.get_day_display }}</td>
+        <td>{{ lesson.lesson_number }}</td>
+        <td>{{ lesson.subject }}</td>
+        <td>{{ lesson.teacher }}</td>
+        <td>{{ lesson.classroom }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
